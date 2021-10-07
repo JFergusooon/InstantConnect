@@ -1,0 +1,138 @@
+version: '3.9'
+
+services:
+  svc-registry:
+    build:
+      context: ./SvcRegistry
+      dockerfile: Dockerfile
+    image: svcregistry-image
+    restart: always
+    ports:
+      - "8761:8761"
+
+
+  mysql:
+    build:
+      context: ./docker/mysql
+    image: mysql-image
+    #        environment:
+    #          - MYSQL_ROOT_PASSWORD=test
+    #          - MYSQL_DATABASE=InstantConnect
+    #          - MYSQL_USER=jferguson
+    #          - MYSQL_PASSWORD=test
+    cap_add:
+      - SYS_NICE
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+    command: mysqld
+
+  mongo:
+    #build:
+    #context: ./docker/mongodb
+    #dockerfile: Dockerfile
+    image: mongo:latest
+    container_name: instantconnect-mongo
+    environment:
+      - MONGO_INITDB_DATABASE=InstantConnect
+      - MONGO_INITDB_ROOT_USERNAME=test
+      - MONGO_INITDB_ROOT_PASSWORD=test
+    restart: always
+    ports:
+      - "27017-27019:27017-27019"
+    volumes:
+      - ./docker/mongodb/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./docker/mongodb/data:/data/db
+
+  user-service:
+    build:
+      context: ./UserService
+      dockerfile: Dockerfile
+    image: user-service-image
+    restart: always
+    depends_on:
+      - svc-registry
+    ports:
+      - "4004:8080"
+    environment:
+      - DATABASE_HOST=mysql
+      - DATABASE_NAME=InstantConnect
+      - DATABASE_USERNAME=jferguson
+      - DATABASE_PASSWORD=test
+
+#  user-service-2:
+#    build:
+#      context: ./UserService
+#      dockerfile: Dockerfile
+#    image: user-service-image
+#    restart: always
+#    depends_on:
+#      - socialite-svc-registry
+#    ports:
+#      - "4009:8080"
+#    environment:
+#      - DATABASE_HOST=socialite-mysql
+#      - DATABASE_NAME=socialite
+#      - DATABASE_USERNAME=aatkinson
+#      - DATABASE_PASSWORD=test
+
+#  post-service:
+#    build:
+#      context: ./PostService
+#      dockerfile: Dockerfile
+#    image: post-service-image
+#    restart: always
+#    depends_on:
+#      - socialite-mongo
+#    ports:
+#      - "4005:8080"
+#    environment:
+#      - MONGO_INITDB_DATABASE=Socialite
+#      - MONGO_INITDB_ROOT_USERNAME=test
+#      - MONGO_INITDB_ROOT_PASSWORD=test
+#      - DATABASE_HOST=socialite-mysql
+#      - DATABASE_NAME=socialite
+#      - DATABASE_USERNAME=aatkinson
+#      - DATABASE_PASSWORD=test
+#
+#  post-service-2:
+#    build:
+#      context: ./PostService
+#      dockerfile: Dockerfile
+#    image: post-service-image
+#    restart: always
+#    depends_on:
+#      - socialite-mongo
+#    ports:
+#      - "4010:8080"
+#    environment:
+#      - MONGO_INITDB_DATABASE=Socialite
+#      - MONGO_INITDB_ROOT_USERNAME=test
+#      - MONGO_INITDB_ROOT_PASSWORD=test
+#      - DATABASE_HOST=socialite-mysql
+#      - DATABASE_NAME=socialite
+#      - DATABASE_USERNAME=aatkinson
+#      - DATABASE_PASSWORD=test
+
+  api-service:
+    build:
+      context: ./API-Gateway
+      dockerfile: Dockerfile
+    image: api-service-image
+    restart: always
+    depends_on:
+      - svc-registry
+    ports:
+      - "4006:8080"
+
+#  email-service:
+#    build:
+#      context: ./EmailService
+#      dockerfile: Dockerfile
+#    image: email-service-image
+#    restart: always
+#    depends_on:
+#      - socialite-svc-registry
+#    ports:
+#      - "4007:8080"
