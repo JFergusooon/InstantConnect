@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/API-Gateway/API-Gateway.iml" filepath="$PROJECT_DIR$/API-Gateway/API-Gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EmailService/EmailService.iml" filepath="$PROJECT_DIR$/EmailService/EmailService.iml" />
       <module fileurl="file://$PROJECT_DIR$/InstantConnect.iml" filepath="$PROJECT_DIR$/InstantConnect.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PostService/PostService.iml" filepath="$PROJECT_DIR$/PostService/PostService.iml" />
       <module fileurl="file://$PROJECT_DIR$/SvcRegistry/SvcRegistry.iml" filepath="$PROJECT_DIR$/SvcRegistry/SvcRegistry.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserService/UserService.iml" filepath="$PROJECT_DIR$/UserService/UserService.iml" />
     </modules>

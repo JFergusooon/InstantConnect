@@ -18,7 +18,7 @@ public class ApiGatewayApplication {
     @Bean
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder){
         return builder.routes()
-                //.route(r -> r.path("/post/**").uri("lb://POST-SERVICE"))
+                .route(r -> r.path("/post/**").uri("lb://POST-SERVICE"))
                 .route(r-> r.path("/user/**").uri("lb://USER-SERVICE"))
                 .route(r-> r.path("/email/**").uri("lb://EMAIL-SERVICE"))
                 .build();
