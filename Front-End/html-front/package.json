@@ -1,0 +1,22 @@
+{
+  "name": "front-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jeffro",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "favicon": "0.0.2",
+    "mongoose": "^5.13.5",
+    "nodemon": "^2.0.14",
+    "path": "^0.12.7",
+    "pug": "^3.0.2",
+    "serve-favicon": "^2.5.0"
+  }
+}

@@ -1,0 +1,29 @@
+extends layout
+
+
+block content
+    div(id='idontknow')
+        p(class='HomeTitle') Home
+        button(onclick='handlePostForm()' id='writeBtn') Write Post...
+    br
+    div(id='newPostForm' style='display : none;')
+
+        div(id='postBodyForm')
+            button(id='closeBtn' onclick='handlePostForm();') X
+            br
+            textarea(id='postBody' oninput='auto_grow()' maxlength=200)
+            div
+                input(type='checkbox' id='isPrivateBox')
+                p(id='privtxt') Private?
+                p(id='tempCharLeft') Characters left:
+                p(id = 'tempDigits')  200 / 200
+                button(id='submitPostBtn' onclick='createPost()') Submit Post
+    div(id='userFeedDiv')
+
+
+    script
+        include ../scripts/navBar.js
+        include ../scripts/userScript.js
+        include ../scripts/home.js
+
+

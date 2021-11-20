@@ -1,0 +1,8 @@
+html {
+    min-height:100%;
+}
+body {
+    text-align: center;
+    background: linear-gradient(360deg, #dd9853 0%, #ffc57c 100%);
+    min-height: 100%;
+}

@@ -1,0 +1,16 @@
+extends layout
+
+block scripts
+    link(href='/trending.css' rel='stylesheet')
+
+block content
+    div(id='contentDiv')
+        p(class='PageTitle') Top 10 Trending
+
+
+        div(id='foundPeopleDiv')
+            div(id='otherDiv1')
+            div(id='otherDiv2')
+
+    script
+        include ../scripts/trending.js

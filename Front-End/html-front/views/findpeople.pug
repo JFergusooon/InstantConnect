@@ -1,0 +1,17 @@
+extends layout
+
+block scripts
+    link(href='/findPeople.css' rel='stylesheet')
+    link(href='/trending.css' rel='stylesheet')
+
+block content
+    div(id='contentDiv')
+        p(class='PageTitle') Find Users
+
+        div(id='searchBar')
+            input(id='searchBarInput' placeholder="Search Users...")
+            button(id='searchButton' onclick='showSearch()') Search
+        div(id='foundPeopleDiv')
+            div(id='otherDiv')
+    script
+        include ../scripts/findPeople.js

@@ -1,0 +1,88 @@
+doctype
+html
+    head
+        title Instant Connect
+        link(href='/style.css' rel='stylesheet')
+        link(href='/nav.css' rel='stylesheet')
+        link(href='/home.css' rel='stylesheet')
+        link(href='/findPeople.css' rel='stylesheet')
+        link(href='/trending.css' rel='stylesheet')
+        link(href='/public_account.css' rel='stylesheet')
+        link(href='/private_account.css' rel='stylesheet')
+
+        block scripts
+    body
+        //NAVIGATION BANNER
+        div(id='navBarDiv')
+            div(id='titleBarDiv')
+                h1(id='title') InstantConnect
+
+            div(id='buttonBarDiv')
+                button(class='btn4' id='hBtn' onclick = "window.location.href='/home';") Home
+                button(class='btn' id='fBtn' onclick = "window.location.href='/findpeople';") Find People
+                button(class='btn' id='tBtn' onclick = "window.location.href='/trending';") Trending
+
+
+
+
+
+                button(class='btn2' id='loBtn' onclick = 'unsaveCredentials()') Logout
+                button(class='btn2' id='lBtn' onclick='handleForm()') Login
+
+
+
+
+                button(class='btn3' id='mBtn' onclick = 'bringToPage()') MyPage
+
+
+                p(id = 'currentUserP')
+
+
+
+
+                div(class = 'form-popup' id='myForm')
+                    form(action="" class='form-container')
+                        div(id='LOGINDIV' style='display : block')
+                            h1(id='loogin') Login
+
+                            label Username
+                            input(type='text' class='loginInput' id='ii_username' placeholder='Enter Username' required)
+                            br
+                            label Password
+                            input(type='password' class='loginInput' id='ii_password' placeholder='Enter Password' required)
+
+                            button(type='button' class='btnLogin' onclick='loginUser()') Login
+                        div(id='REGISTERDIV' style='display : none')
+                            h1(id='reegister') Register
+
+
+                            label First Name
+                            input(type='text' class='loginInput' id='i_firstname' placeholder='Enter First Name'  required )
+                            br
+                            label Last Name
+                            input(type='text' class='loginInput' id='i_lastname' placeholder='Enter Last Name'  required )
+                            br
+                            label(style='padding: 0 7px 0 0;') Username
+                            input(type='text' class='loginInput' id='i_username' placeholder='Enter Username'  required )
+                            br
+                            label(style='padding: 0 25px 0 0') Email
+                            input(type='text' class='loginInput' id='i_email' placeholder='Enter Email'  required )
+                            br
+                            label(style='padding: 0 25px 0 0') Password
+                            input(type='password' class='loginInput' id='i_password' placeholder='Enter Password' required)
+
+                            button(class='btnLogin' onclick='registerUser()') Register
+
+                        button(type='button' class='btn9' onclick='changeRegisterLogin()' id='registerButton') Register
+                        button(type='button' class='btn2' onclick="handleForm()") Close
+
+        script
+            include ../scripts/navBar.js
+            include ../scripts/userScript.js
+            include ../scripts/home.js
+            include ../scripts/trending.js
+            include ../scripts/findPeople.js
+            include ../scripts/public_account.js
+            include ../scripts/private_account.js
+
+        block content

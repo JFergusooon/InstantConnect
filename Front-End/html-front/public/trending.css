@@ -1,0 +1,122 @@
+
+
+
+.leftCatBox
+{
+    display: inline-block;
+    text-align: center;
+    padding: 0;
+    position: relative;
+    margin-left: 200px;
+    float: left;
+}
+
+
+.rightCatBox
+{
+    display: inline-block;
+    text-align: center;
+    padding: 0;
+    position: relative;
+    margin-right: 200px;
+    float: right;
+}
+
+.postBox
+{
+    border-radius: 30px;
+    border: solid black 5px;
+    height: 150px;
+    max-height: 150px;
+    min-height: 150px;
+    width: 150px;
+    max-width: 500px;
+    min-width: 500px;
+    flex: 1;
+    flex-direction: column;
+    background-color: #b3aba8;
+    margin: 5px 5px 30px;
+}
+
+#t_likeCount {
+    position: relative;
+    float: right;
+    margin-top: -10px;
+    margin-right: 5px;
+    font-size: 30px;
+}
+
+#t_username {
+    position: relative;
+    font-size: 40px;
+    font-weight: bolder;
+    margin-right: 200px;
+    margin-top: -1px;
+}
+
+#t_likeButton {
+    float: right;
+    position: relative;
+    margin-top: -17px;
+    margin-right: 5px;
+    text-align: center;
+    box-shadow:inset 0 0 15px 3px #23395e;
+    background: #2e466e linear-gradient(to bottom, #2e466e 5%, #415989 100%);
+    border-radius:17px;
+    border:1px solid #1f2f47;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family: Arial, serif;
+    font-size:20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-decoration:none;
+    text-shadow:0 1px 0 #263666;
+    width: 70px;
+    height: 50px;
+
+
+}
+#t_likeButton:hover {
+    background: #415989 linear-gradient(to bottom, #415989 5%, #2e466e 100%);
+}
+#t_likeButton:active {
+    background: radial-gradient(#ffa805 0%, #e8e8a7 100%);
+    position:relative;
+    top:1px;
+}
+
+
+#t_postBody {
+    position: relative;
+    font-size: 30px;
+    width: 100%;
+    margin-right: 400px;
+    margin-top: -1px;
+}
+
+.trending_image {
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    float: left;
+    position: relative;
+    margin-left: 25px;
+    margin-top: 30px;
+}
+
+.PageTitle {
+    font-size: 40px;
+}
+
+.HomeTitle {
+    float: left;
+    font-size: 40px;
+    margin-left: 47%;
+}
+
+
+
+
+
