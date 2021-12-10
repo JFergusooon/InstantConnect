@@ -1,23 +1,19 @@
 import ProfileBox from "./ProfileBox";
 import {useState} from "react";
-const NewPost = ({people, index}) => {
+const NewPost = ({people, closeBox}) => {
     const [curPostContent, setCurPostContent] = useState("");
     const [curPostPrivacy, setCurPostPrivacy] = useState("false");
-
+    const [curChar, setCurChar] = useState(0);
 
     const submitCss = {
-        boxShadow :"inset 0 0 15px 3px #23395e",
-        background: "#2e466e linear-gradient(to bottom, #2e466e 5%, #415989 100%)",
+        background: "#f2f2f2",
         borderRadius: "17px",
-        border: "1px solid #1f2f47",
+        border: "1px solid white",
         cursor: "pointer",
-        color: "#ffffff",
         fontFamily: "Arial, serif",
         fontSize: "20px",
         padding: "6px",
-        textDecoration : "none",
-        textShadow: "0 1px 0 #263666",
-        width: "175px",
+        width: "100%",
         height: "40px"
     }
 
@@ -49,23 +45,32 @@ const NewPost = ({people, index}) => {
         console.log("POST CREATED BY : " + u);
     }
 
+    function inputAdjust() {
+    }
 
 return (
     <div style={{
-        textAlign: "Center", background: "steelblue",
-        width: "600px", margin: "0 auto", height: "300px"}}>
+        borderRadius: "5px", textAlign: "Center", background: "white",
+        width: "660px", margin: "0 auto", height: "260px"}}>
+        {/*<button style={{marginTop: "5px", marginRight: "5px",background: "maroon",color :"white", float: "right"}} onClick={closeBox}>X</button>*/}
+        <textarea style={{borderRadius: "18px", width: "640px", marginTop: "10px", background: "lightgray", fontSize: "20px",height: "130px", maxLength: 75}} onChange={({ target }) => {
+            setCurPostContent(target.value);
+            setCurChar(target.value.length);
+        }
+        }/>
 
-        <input style={{width: "500px", marginTop: "30px", height: "140px"}} onChange={({ target }) => setCurPostContent(target.value)}/>
         <br/>
-        <div style={{display: "inline-block"}}>
-            <input type='checkbox' onChange={({ target }) => setCurPostPrivacy(target.checked)}/>
-            <p style={{float: ""}}>Private?</p>
+        <br/>
+        <div style={{display: "inline-block", width: "75px", marginRight: "415px"}}>
+            <input style={{float: "left"}} type='checkbox' onChange={({ target }) => setCurPostPrivacy(target.checked)}/>
+            <p>Private?</p>
         </div>
-
-        <div style={{display: "inline-block", marginTop: "80px"}}>
-            <p style={{float: "left", paddingRight: "200px"}}> 0 / 250 Characters</p>
+        <div>
+            <p style={{width: "190px"}}> {curChar} / 75 Characters</p>
+            <br/>
             <button style={submitCss} onClick={newPostFunc}>Submit Post</button>
         </div>
+
 
     </div>
 )

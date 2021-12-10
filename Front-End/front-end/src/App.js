@@ -7,15 +7,12 @@ import {Navbar} from "react-bootstrap";
 import Trending from "./components/pages/Trending";
 import FindPeople from "./components/pages/FindPeople";
 import Groups from "./components/pages/Groups";
-import MyPage from "./components/pages/MyPage";
+import PrivatePage from "./components/pages/PrivatePage";
 import Home from "./components/pages/Home";
+import PublicPage from "./components/pages/PublicPage";
 
 function App() {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [user, setUser] = useState()
-
-
+    let privatePath = '/private/' + localStorage.getItem('username')
 
     return (
       <Router>
@@ -29,7 +26,8 @@ function App() {
           <Route path='/findpeople' component={FindPeople} />
           <Route path='/groups' component={Groups}/>
 
-          <Route path='/private' component={MyPage}/>
+          <Route path={privatePath} component={PrivatePage}/>
+          <Route exact path={"/public/:id"} component={PublicPage}/>
       </Router>
     );
 }

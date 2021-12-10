@@ -10,7 +10,6 @@ async function createPublicUserPage(username) {
     let friends = await response2.json();
 
 
-    //console.log(user);
 
     let ele = document.getElementById("public_content");
 

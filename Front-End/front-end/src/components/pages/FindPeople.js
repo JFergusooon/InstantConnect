@@ -84,7 +84,7 @@ async function showSearch() {
                 <h1> Find People </h1>
                 <br/>
                 <div>
-                    <input id="searchBarInput" style={searchBarInpu} placeholder={"Search Users..."} value={searchTerm} onChange={({ target }) => setSearchTerm(target.value)}/>
+                    <input id="searchBarInput" style={searchBarInpu} placeholder={"Search Users..."} onChange={({ target }) => setSearchTerm(target.value)}/>
                     <button style={searchButton} onClick={showSe}>Search</button>
                 </div>
                 <br/>

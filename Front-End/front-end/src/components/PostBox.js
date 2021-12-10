@@ -2,31 +2,39 @@
 const PostBox = ({task}) => {
     const pBox = {
         backgroundColor: "white",
-        width: "350px",
+        width: "520px",
         height: "140px",
-        borderRadius: "10px",
+        borderRadius: "5px",
         fontSize: "30px",
-        border: "1px solid black",
         margin: "0 auto",
         marginBottom: "10px"
     }
-    const addButCss = {
-        boxShadow :"inset 0 0 15px 3px #23395e",
-        background: "#2e466e linear-gradient(to bottom, #2e466e 5%, #415989 100%)",
-        borderRadius: "17px",
-        border: "1px solid #1f2f47",
+    const likeButCss = {
+        background: "#f2f2f2",
+        borderRight: "1px solid black",
+        borderRadius: "5px",
+        border: "solid 2px white",
         display: "inline-block",
         cursor: "pointer",
-        color: "#ffffff",
         fontFamily: "Arial, serif",
         fontSize: "20px",
-        padding: "6px",
         textDecoration : "none",
-        textShadow: "0 1px 0 #263666",
-        width: "80px",
-        height: "30px",
-        float: "right",
-        marginRight: "3px"
+        width: "50%",
+        height: "35px",
+    }
+
+    const commentButCss = {
+        background: "#f2f2f2",
+        borderLeft: "1px solid black",
+        borderRadius: "5px",
+        border: "solid 2px white",
+        display: "inline-block",
+        cursor: "pointer",
+        fontFamily: "Arial, serif",
+        fontSize: "20px",
+        textDecoration : "none",
+        width: "50%",
+        height: "35px",
     }
 
     const taskId = task.postId;
@@ -59,16 +67,27 @@ const PostBox = ({task}) => {
     return (
         <div style={pBox}>
             <div style={{
-                width: "100px",
-                height: "100px",
+                width: "50px",
+                height: "50px",
                 backgroundColor: "darkgray",
-                marginTop: "20px",
-                marginLeft: "20px",
-                float: "left"
+                marginTop: "10px",
+                marginLeft: "10px",
+                float: "left", marginRight: "10px"
             }}/>
-            <h3 style={{marginTop: "10px"}}>{task.username}</h3>
-            <p style={{fontSize:"23px", height: "55px"}}>{task.postBody}</p>
-            <button style={addButCss} onClick={likePost}>Like&nbsp;&nbsp;{task.likes}</button>
+            <div style={{textAlign: "left", marginTop: "10px"}}>
+                <a href={"http://localhost:3001/public/" + task.username} style={{marginTop: "10px", fontSize: "28px"}}>{task.username}</a>
+                <p style={{fontSize:"23px", marginLeft: "40px", height: "55px"}}>{task.postBody}</p>
+            </div>
+
+
+
+
+
+            <div style={{marginTop: "15px", border: "0.5px solid gray"}}>
+                <button style={likeButCss} onClick={likePost}>Like&nbsp;&nbsp;{task.likes}</button>
+                <button style={commentButCss}>Comment</button>
+            </div>
+
 
         </div>
     )

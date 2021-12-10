@@ -44,7 +44,7 @@ public class MailRestController {
 
         System.out.println(goingToUser.getEmail());
         System.out.println(comingFromUser.getEmail());
-        message.setFrom("SocialiteSecrets@gmail.com");
+        message.setFrom("softwaredummy02@gmail.com");
         if(comingFromUser.getFriends().contains(goingToUser.getUsername())){
             System.out.println("This user is already your friend, silly goose");
         }
@@ -74,6 +74,7 @@ public class MailRestController {
 
         try {
             mailSender.send(mimeMessage);
+
         }catch (Exception e){
             e.printStackTrace();
         }

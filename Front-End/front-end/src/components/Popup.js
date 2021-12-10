@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import './componentStyling/popupStyle.css'
 
@@ -16,8 +16,32 @@ const Popup = ({text, closePopup}) => {
     const [regEmail, setRegEmail] = useState("");
 
 
+    const [searUser, setSearUser] = useState([]);
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    const [allUsers, setAllUsers] = useState();
 
 
+    useEffect(() => {
+        let url = 'http://localhost:4006/user/'
+        let encode = window.btoa("admin:admin");
+        fetch(url, {
+            headers: {
+                'Authorization':  'Basic ' + encode }}
+        )
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setAllUsers(result);
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            )
+    }, [])
 
     function changeForm() {
         if(curFunc === "login")
@@ -26,15 +50,41 @@ const Popup = ({text, closePopup}) => {
             setCurFunc("login")
     }
 
+    function checkIfUser() {
+        let match;
+
+
+
+        console.log("LOGIN ATTEMPT : " + allUsers)
+        for(let i = 0; i < allUsers.length; i++)
+        {
+            console.log(i + ":  " + allUsers[i].username)
+            if(inputUser === allUsers[i].username)
+            {
+                // STILL NEED TO CHECK FOR PASSWORD CORRECTION
+                match = true;
+            }
+        }
+
+
+
+        return match;
+    }
+
+
     function loginUser() {
-        localStorage.setItem('username', inputUser)
-        localStorage.setItem('password', inputPass)
+        function check() { checkIfUser(); return checkIfUser();}
+
+        if(check() === true) {
+            localStorage.setItem('username', inputUser)
+            localStorage.setItem('password', inputPass)
+            console.log("cur Username : " + localStorage.getItem("username"))
+            console.log("cur Password : " + localStorage.getItem("password"))
+            closePopup()
+        }
 
 
-        console.log("///////////////////////////////////");
-        console.log("cur Username : " + localStorage.getItem("username"))
-        console.log("cur Password : " + localStorage.getItem("password"))
-        closePopup()
+
     }
 
 
@@ -75,7 +125,7 @@ const Popup = ({text, closePopup}) => {
                     <br/>
                     <div style={{display: "inline-block"}}>
                         <p> Password: </p>
-                        <input style={{height: "40px", margin: "0 auto"}} onChange={({ target }) => setInputPass(target.value)}/> <br/>
+                        <input style={{height: "40px", margin: "0 auto", float: "right"}} onChange={({ target }) => setInputPass(target.value)}/> <br/>
                     </div>
                     <br/>
                     <br/>

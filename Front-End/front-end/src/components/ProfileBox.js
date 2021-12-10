@@ -2,7 +2,7 @@
 const ProfileBox = ({task}) => {
     const pBox = {
         backgroundColor: "lightgray",
-        width: "350px",
+        width: "370px",
         height: "150px",
         borderRadius: "10px",
         fontSize: "30px",
@@ -12,31 +12,51 @@ const ProfileBox = ({task}) => {
     }
 
     const addButCss = {
-        marginTop: "20px",
-        boxShadow :"inset 0 0 15px 3px #23395e",
-        background: "#2e466e linear-gradient(to bottom, #2e466e 5%, #415989 100%)",
-        borderRadius: "17px",
-        border: "1px solid #1f2f47",
+        background: "white",
+        borderRadius: "5px",
+        border: "solid 2px white",
+        display: "inline-block",
         cursor: "pointer",
-        color: "#ffffff",
         fontFamily: "Arial, serif",
         fontSize: "20px",
-        padding: "6px",
         textDecoration : "none",
-        textShadow: "0 1px 0 #263666",
-        width: "150px",
-        height: "30px",
-        float: "right"
+        width: "50%",
+        height: "35px"
     }
+
+
+    function sendRequest() {
+        let u = localStorage.getItem("username");
+        let p = localStorage.getItem("password");
+        let auth = u + ":" + p;
+        let encode = window.btoa(auth);
+
+
+
+
+
+        let xhr = new XMLHttpRequest();
+        console.log(u);
+        let url = "http://localhost:4006/email/FriendRequestEmail/" + u + "/" + task.username;
+        console.log("URL : " + url)
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader( 'Access-Control-Allow-Origin', '*');
+        xhr.setRequestHeader('Authorization', 'Basic ' + encode);
+        xhr.send();
+    }
+
+
 
     return (
         <div style={pBox}>
             <div style={{ width: "100px", height: "100px",
                 backgroundColor: task.pageColor, float: "left",
-                marginTop: "30px", marginLeft: "30px"}}/>
-            <h3 style={{}}>{task.username}</h3>
+                marginTop: "20px", marginLeft: "20px"}}/>
+            <a href={"http://localhost:3001/public/" + task.username}>{task.username}</a>
             <p style={{fontSize:"23px", height: "55px"}}>{task.status}</p>
-            <button style={addButCss}>Add Friend</button>
+            <button style={addButCss} onClick={sendRequest}>Add Friend</button>
         </div>
     )
 }
