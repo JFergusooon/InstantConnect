@@ -1,5 +1,7 @@
 
 const PostBox = ({task}) => {
+    let curColor = Math.floor(Math.random() * 6);
+    let cooler = "";
     const pBox = {
         backgroundColor: "white",
         width: "520px",
@@ -22,7 +24,6 @@ const PostBox = ({task}) => {
         width: "50%",
         height: "35px",
     }
-
     const commentButCss = {
         background: "#f2f2f2",
         borderLeft: "1px solid black",
@@ -36,8 +37,33 @@ const PostBox = ({task}) => {
         width: "50%",
         height: "35px",
     }
-
     const taskId = task.postId;
+
+    switch (curColor) {
+        case 0:
+            cooler = "Maroon";
+            break;
+        case 1:
+            cooler = "Green";
+            break;
+        case 2:
+            cooler = "Purple";
+            break;
+        case 3:
+            cooler = "Yellow";
+            break;
+        case 4:
+            cooler = "Blue";
+            break;
+        case 5:
+            cooler = "Red";
+            break;
+        default:
+            break;
+
+    }
+
+
 
     function likePost()
     {
@@ -63,13 +89,13 @@ const PostBox = ({task}) => {
         window.location.reload()
     }
 
-
+    //console.log(cooler)
     return (
         <div style={pBox}>
             <div style={{
                 width: "50px",
                 height: "50px",
-                backgroundColor: "darkgray",
+                backgroundColor: cooler,
                 marginTop: "10px",
                 marginLeft: "10px",
                 float: "left", marginRight: "10px"

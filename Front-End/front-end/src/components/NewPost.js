@@ -45,17 +45,30 @@ const NewPost = ({people, closeBox}) => {
         console.log("POST CREATED BY : " + u);
     }
 
-    function inputAdjust() {
-    }
 
 return (
     <div style={{
         borderRadius: "5px", textAlign: "Center", background: "white",
         width: "660px", margin: "0 auto", height: "260px"}}>
         {/*<button style={{marginTop: "5px", marginRight: "5px",background: "maroon",color :"white", float: "right"}} onClick={closeBox}>X</button>*/}
-        <textarea style={{borderRadius: "18px", width: "640px", marginTop: "10px", background: "lightgray", fontSize: "20px",height: "130px", maxLength: 75}} onChange={({ target }) => {
+        <textarea style={{borderRadius: "18px", width: "640px", marginTop: "10px", background: "lightgray", fontSize: "20px",height: "130px", maxLength: "75"}} onChange={({ target }) => {
             setCurPostContent(target.value);
+            if(target.value.length > 75)
+            {
+                let half1 = target.value.substring(0,75).substring(0, target.value.length/2);
+                let half2 = target.value.substring(0,75).substring(target.value.length/2);
+                setCurPostContent(half1 + "\n" + half2)
+                // setCurPostContent(target.value.substring(0,75));
+            }
+            else
+            {
+                let half1 = target.value.substring(0, target.value.length/2);
+                let half2 = target.value.substring(target.value.length/2);
+                setCurPostContent(half1 + "\n" + half2)
+                // setCurPostContent(target.value);
+            }
             setCurChar(target.value.length);
+
         }
         }/>
 

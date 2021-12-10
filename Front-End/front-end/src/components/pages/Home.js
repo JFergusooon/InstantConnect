@@ -30,6 +30,7 @@ const Home = () => {
                     setError(error);
                 }
             )
+        console.log(friendsPosts)
     }, [])
     return (
         <div style={{textAlign: "center"}}>

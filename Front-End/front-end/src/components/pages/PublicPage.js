@@ -2,16 +2,16 @@ import {useEffect, useState} from "react";
 import ProfileInfoBox from "../ProfileInfoBox";
 import PostList from "../PostList";
 import MoreDetails from "../MoreDetails";
-import {forEach} from "react-bootstrap/ElementChildren";
 
 const PublicPage = () => {
     const [user, setUser] = useState();
     const [posts, setPosts] = useState();
+    const [friends, setFriends] = useState([]);
     const [postOrDetails, setPostOrDetails] = useState(true);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     let username = window.location.href.split('/').at(4);
-    console.log("curDomainUser: " + username)
+    //console.log("curDomainUser: " + username)
 
     function changeViewToPost() {
         setPostOrDetails(true)
@@ -26,7 +26,7 @@ const PublicPage = () => {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result)
+                    //console.log(result)
                     setIsLoaded(true);
                     setUser(result);
                 },
@@ -36,22 +36,13 @@ const PublicPage = () => {
                 }
             )
 
-    }, [])
-
-    useEffect(() => {
-        let url = "http://localhost:4006/post/getUserPosts/" + username
-        fetch(url)
+        let url2 = "http://localhost:4006/post/getUserPosts/" + username
+        fetch(url2)
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log("USER's POSTS: " + result[0].postBody)
-
-                    let arr = [];
-                    result.forEach(s => arr.concat(s))
-                    console.log("ARR" + arr)
-
                     setIsLoaded(true);
-                    setPosts(arr);
+                    setPosts(result);
                 },
                 (error) => {
                     setIsLoaded(true);
@@ -59,11 +50,41 @@ const PublicPage = () => {
                 }
             )
 
+
+
+        const controller = new AbortController();
+        const signal = controller.signal;
+        let url3 = 'http://localhost:4006/user/getAllFriends/' + username;
+        fetch(url3, {signal: signal})
+            .then(res => res.json())
+            .then(
+
+                (result) => {
+                    setIsLoaded(true);
+                    setFriends(result);
+                    //console.log("FRIEND RESULT : " + result)
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            )
+
+
+
+        return () => {
+            setIsLoaded(false)
+            setError(null)
+        }
     }, [])
 
+
+    // console.log("FR: " + friends[1].username)
+    // console.log("FR: " + friends[0].username)
+    // let fr = {friends}
     return (
         <div style={{textAlign: "center"}}>
-            {user ? <ProfileInfoBox username={user.username} firstname={user.firstname} lastname={user.lastname} status={user.status} pageColor={user.pageColor}/> : "USER NOT LOADED"}
+            {user ? <ProfileInfoBox username={user.username} firstname={user.firstname} lastname={user.lastname} status={user.status} pageColor={user.pageColor} friendss = {friends}/> : "USER NOT LOADED"}
 
             {/*// POSTS BOX / MORE INFO BOX //*/}
             <div style={{width: "100%"}}>
@@ -77,12 +98,8 @@ const PublicPage = () => {
 
 
 
-
-
-
-
-            {/*<PostList people={posts} />*/}
-            {postOrDetails ? "no posts atm" : <MoreDetails email={user.email}/>}
+            {postOrDetails ? (posts ? <div style={{marginLeft: "500px"}}><PostList people={posts}/></div> : "no posts atm")
+                : <MoreDetails email={user.email}/>}
         </div>
     )
 }

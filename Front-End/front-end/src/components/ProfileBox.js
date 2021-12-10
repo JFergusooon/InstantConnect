@@ -25,27 +25,49 @@ const ProfileBox = ({task}) => {
     }
 
 
+    // function sendRequest() {
+    //     let u = localStorage.getItem("username");
+    //     let p = localStorage.getItem("password");
+    //     let auth = u + ":" + p;
+    //     let encode = window.btoa(auth);
+    //
+    //
+    //
+    //
+    //
+    //     let xhr = new XMLHttpRequest();
+    //     console.log(u);
+    //     let url = "http://localhost:4006/email/FriendRequestEmail/" + u + "/" + task.username;
+    //     console.log("URL : " + url)
+    //     xhr.open("POST", url, true);
+    //     xhr.setRequestHeader("Accept", "application/json");
+    //     xhr.setRequestHeader("Content-Type", "application/json");
+    //     xhr.setRequestHeader( 'Access-Control-Allow-Origin', '*');
+    //     xhr.setRequestHeader('Authorization', 'Basic ' + encode);
+    //     xhr.send();
+    // }
+
     function sendRequest() {
-        let u = localStorage.getItem("username");
-        let p = localStorage.getItem("password");
-        let auth = u + ":" + p;
-        let encode = window.btoa(auth);
+            let u = localStorage.getItem("username");
+            let p = localStorage.getItem("password");
+            let auth = u + ":" + p;
+            let encode = window.btoa(auth);
 
 
 
 
 
-        let xhr = new XMLHttpRequest();
-        console.log(u);
-        let url = "http://localhost:4006/email/FriendRequestEmail/" + u + "/" + task.username;
-        console.log("URL : " + url)
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Accept", "application/json");
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader( 'Access-Control-Allow-Origin', '*');
-        xhr.setRequestHeader('Authorization', 'Basic ' + encode);
-        xhr.send();
-    }
+            let xhr = new XMLHttpRequest();
+            console.log(u);
+            let url = "http://localhost:4006/user/addFriend/" + u + "/" + task.username;
+            console.log("URL : " + url)
+            xhr.open("PUT", url, true);
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader( 'Access-Control-Allow-Origin', '*');
+            xhr.setRequestHeader('Authorization', 'Basic ' + encode);
+            xhr.send();
+        }
 
 
 

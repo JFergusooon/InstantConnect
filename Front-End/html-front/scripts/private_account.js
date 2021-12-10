@@ -328,12 +328,9 @@ function deletePost(postId) {
     createPrivateUserPage(document.getElementById('pub_username').innerText).then();
 }
 
-function updateProfile(user) {
-    /*
-    /updateUser/{username}/{newUsername}/{password}/{firstname}/{lastname}/{email}/{motto}/{color}
-    */
-    let u = localStorage.getItem("storedUsername");
-    let p = localStorage.getItem("storedPassword");
+function updateProfile() {
+    let u = localStorage.getItem("uUsername");
+    let p = localStorage.getItem("password");
     let auth = u + ":" + p;
     let encode = window.btoa(auth);
 

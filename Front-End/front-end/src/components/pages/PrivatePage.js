@@ -3,12 +3,14 @@ import ProfileInfoBox from "../ProfileInfoBox";
 import MoreDetails from "../MoreDetails";
 import PrProfileInfoBox from "../PrProfileInfoBox";
 import PostList from "../PostList";
+import PrPostList from "../PrPostList";
 
 const PrivatePage = () => {
     const [loggedIn, setLoggedIn] = useState(false);
 
     const [user, setUser] = useState();
     const [posts, setPosts] = useState();
+    const [friends, setFriends] = useState([]);
     const [postOrDetails, setPostOrDetails] = useState(true);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -53,6 +55,27 @@ const PrivatePage = () => {
                 }
             )
 
+        const controller = new AbortController();
+        const signal = controller.signal;
+        let url3 = 'http://localhost:4006/user/getAllFriends/' + username;
+        fetch(url3, {signal: signal})
+            .then(res => res.json())
+            .then(
+
+                (result) => {
+                    setIsLoaded(true);
+                    setFriends(result);
+                    //console.log("FRIEND RESULT : " + result)
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            )
+        return () => {
+            setIsLoaded(false)
+            setError(null)
+        }
 
     }, [])
 
@@ -67,9 +90,8 @@ const PrivatePage = () => {
             {localStorage.getItem('username') === window.location.pathname.split('/')[2] ?
 
 
-
                 <div style={{textAlign: "center"}}>
-                    {user ? <PrProfileInfoBox username={user.username} firstname={user.firstname} lastname={user.lastname} status={user.status} pageColor={user.pageColor}/> : "USER NOT LOADED"}
+                    {user ? <PrProfileInfoBox username={user.username} firstname={user.firstname} lastname={user.lastname} status={user.status} pageColor={user.pageColor} friendss={friends}/> : "USER NOT LOADED"}
 
                     {/*// POSTS BOX / MORE INFO BOX //*/}
                     <div style={{width: "100%"}}>
@@ -79,15 +101,7 @@ const PrivatePage = () => {
                     </div>
 
 
-
-
-
-
-
-
-
-
-                    {postOrDetails ? (posts ? <PostList people={posts} /> : "no posts atm")
+                    {postOrDetails ? (posts ? <div style={{marginLeft: "500px"}}><PrPostList people={posts}/></div> : "no posts atm")
                         : <MoreDetails email={user.email}/>}
                 </div>
 

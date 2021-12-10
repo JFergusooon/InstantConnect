@@ -24,33 +24,7 @@ const Trending = () => {
     }, [])
     console.log("RESULTS : " + posts)
 
-    // SPLIT POSTS INTO 3
-    let index = 1;
-    let thirdPart = [];
-    let secondPart = [];
-    let firstPart = [];
 
-    for(let i = 0; i < posts.length; i++) {
-        if(index === 1)
-        {
-            firstPart.push(posts[i]);
-        }
-        else if(index === 2)
-        {
-            secondPart.push(posts[i]);
-        }
-        else if(index === 3)
-        {
-            thirdPart.push(posts[i])
-            index = 0;
-        }
-
-        index++;
-    }
-
-    console.log(firstPart);
-    console.log(secondPart);
-    console.log(thirdPart);
 
 
     return (
@@ -61,9 +35,7 @@ const Trending = () => {
             <br/>
             <br/>
             <div style={{textAlign: "center", margin: "0 auto", width: "1900px", display: "flex"}}>
-                <PostList people={firstPart}/>
-                <PostList people={secondPart}/>
-                <PostList people={thirdPart}/>
+                <PostList people={posts}/>
             </div>
         </div>
     )

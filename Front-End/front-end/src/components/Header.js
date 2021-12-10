@@ -52,8 +52,10 @@ const Header = ({ title }) => {
                         </a>
 
                     </h1>
-                    <a style={{fontSize: "14px", float: "right"}} href={publicUrl}>{localStorage.getItem('username') !== "" ? ": " + localStorage.getItem('username') : ""}</a>
+
                 </header>
+
+                <a style={{fontSize: "14px", marginTop: "65px"}} href={publicUrl}>{localStorage.getItem('username') !== "" ? localStorage.getItem('username') : ""}</a>
                 <nav className="menu">
                             <ul className="menu-list">
                                 <li className="menu-item is-active menu-item--play">

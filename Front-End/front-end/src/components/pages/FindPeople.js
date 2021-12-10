@@ -2,18 +2,18 @@ import { Link } from 'react-router-dom'
 import ProfileList from "../ProfileList";
 import {useEffect, useState} from "react";
 const searchBarInpu = {
-    fontSize: "40px",
+    fontSize: "36px",
     height: "65px",
     width: "800px",
-    borderRadius: "20px"
-
+    borderRadius: "20px",
+    border:"1px solid white"
 }
 
 const searchButton = {
     fontSize: "40px",
     height: "75px",
     width: "200px",
-    background: "#2e466e linear-gradient(to bottom, #2e466e 5%, #415989 100%)",
+    background: "linear-gradient(180deg, rgba(168,168,168,1) 0%, rgba(129,128,128,1) 100%)",
     borderRadius: "20px"
 }
 
